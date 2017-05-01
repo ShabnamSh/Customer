@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+<br>
+<br>
+<div>
+<div  class="container" ng-controller="UserController as ctrl"  name="cr">
+
+
+Welcome to Blog
+<div ng-init=ctrl.fetchAllUsers()>
+<div ng-repeat="customer in ctrl.customers" >
+
+{{blog.blog}}
+
+
+</div>
+</div>
+</div>
+</div>
+</body>
+</html>

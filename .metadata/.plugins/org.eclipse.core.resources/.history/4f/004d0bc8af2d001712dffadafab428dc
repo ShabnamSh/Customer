@@ -1,0 +1,5 @@
+package com.niit.customer.config;
+
+public class ApplicationContextConfig {
+
+}

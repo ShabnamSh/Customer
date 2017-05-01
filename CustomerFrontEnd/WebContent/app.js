@@ -1,0 +1,70 @@
+var app=angular.module('myApp',['ngRoute','ngCookies']);
+app.config(function($routeProvider){
+	$routeProvider
+	.when('/',{
+		templateUrl:'customer/home.html'
+	})
+	
+	.when('/myProfile',{
+		templateUrl:'customer/myProfile.html',
+		controller : 'UserController'
+	})
+	.when('/login', {
+		templateUrl : 'customer/login.html',
+		controller : 'UserController'
+	})
+	.when('/updateuser', {
+		templateUrl : 'customer/update.html',
+		controller : 'UserController'
+	})
+	
+	
+	.when('/register', {
+		templateUrl : 'customer/registration.html',
+		controller : 'UserController'
+	})
+	
+	.when('/cr',{
+		templateUrl:'customer/customerreport.html',
+			controller : 'UserController'
+	})
+	
+	
+		.otherwise({
+		redirectTo : '/'
+	})
+
+});
+app.run(function($rootScope,$location,$cookieStore,$http){
+
+	 $rootScope.$on('$locationChangeStart', function (event, next, current) {
+		 
+		 console.log("$locationChangeStart");
+		
+		
+		
+		 
+		 var currentPage = $location.path();
+		 
+		
+		 
+		 var isLoggedIn = $rootScope.currentUser.userid;
+	       
+	     console.log("isLoggedIn:" +isLoggedIn);
+	    
+	        
+	      
+	        
+			
+	        
+	 }
+	       );
+	 
+	 // keep user logged in after page refresh
+    $rootScope.currentUser = $cookieStore.get('currentUser') || {};
+    if ($rootScope.currentUser) {
+        $http.defaults.headers.common['Authorization'] = 'Basic' + $rootScope.currentUser; 
+    }
+
+});
+

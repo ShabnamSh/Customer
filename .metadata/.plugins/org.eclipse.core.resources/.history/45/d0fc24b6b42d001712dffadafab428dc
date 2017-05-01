@@ -1,0 +1,52 @@
+package com.niit.customer.dao;
+
+import java.util.List;
+
+import javax.transaction.Transactional;
+
+import org.hibernate.Criteria;
+import org.hibernate.SessionFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
+
+import com.niit.customer.model.Customer;
+@Repository("customerDao")
+@Transactional
+public class CustomerDAOImpl implements CustomerDAO{
+	@Autowired
+	private SessionFactory sessionFactory;
+	public CustomerDAOImpl(){
+		
+	}
+	public CustomerDAOImpl(SessionFactory sessionFactory) {
+		try {
+			this.sessionFactory = sessionFactory;
+		} catch (Exception e) {
+			
+			e.printStackTrace();
+		}
+	}
+	public List<Customer> list() {
+		// TODO Auto-generated method stub
+		@SuppressWarnings("unchecked")
+		List<Customer> list = (List<Customer>) sessionFactory.getCurrentSession().createCriteria(Customer.class).setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY).list();
+
+		return list;
+	}
+
+	public boolean update(Customer customer) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	public boolean delete(Customer customer) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	public boolean save(Customer customer) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+}

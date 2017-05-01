@@ -1,0 +1,5 @@
+package com.niit.customer.dao;
+
+public interface CustomerDAO {
+
+}

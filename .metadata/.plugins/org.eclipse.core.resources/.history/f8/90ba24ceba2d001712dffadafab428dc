@@ -1,0 +1,74 @@
+package com.niit.customer.controller;
+
+import org.springframework.web.bind.annotation.RestController;
+
+@RestController
+public class CustomerController {
+	private static final Logger log = LoggerFactory.getLogger(UserController.class);
+	@Autowired
+	UserDAO userDao;
+	
+	@Autowired 
+	User user;
+	
+	@RequestMapping(value="/getAll", method=RequestMethod.GET)
+	public ResponseEntity<List<User>> getAllUser(){
+		log.debug("staring get All");
+		List users =userDao.list();
+		if(users.isEmpty()){
+			
+		user.setErrorcode("100");
+		user.setErrorMessage("no users are available");
+		users.add(user);
+		return new ResponseEntity<List<User>>(users,HttpStatus.OK);
+		}
+		user.setErrorcode("301");
+		user.setErrorcode("successfully feched from database");
+		return new ResponseEntity<List<User>>(users, HttpStatus.OK);
+		
+	}
+	
+	@PostMapping("/createUser/")
+	public ResponseEntity<User> createUser(@RequestBody User user){
+		log.debug("starting method createUser");
+		if (userDao.get(user.getUserid()) == null) {
+			log.debug("User is going to create with id:" + user.getUserid());
+			user.setIs_online('N');
+			user.setStatus('N');
+			  if (userDao.save(user) ==true)
+			  {
+				  user.setErrorcode("200");
+					user.setErrorMessage("Thank you  for registration. You have successfully registered as " + user.getRole());
+			  }
+			  else
+			  {
+				  user.setErrorcode("404");
+					user.setErrorMessage("Could not complete the operatin please contact Admin");
+		
+				  
+			  }
+			
+			return new ResponseEntity<User>(user, HttpStatus.OK);
+		}
+		log.debug("User already exist with id " + user.getUserid());
+		user.setErrorcode("404");
+		user.setErrorMessage("User already exist with id : " + user.getUserid());
+		return new ResponseEntity<User>(user, HttpStatus.OK);
+	}
+	@DeleteMapping("/deleteUser/{userid}")
+	public ResponseEntity<User> deleteUser(@PathVariable("userid")String id){
+		User user=userDao.get(id);
+		if(user!=null){
+			userDao.delete(user);
+			user.setErrorcode("200");
+			user.setErrorMessage("user deleted successfully");
+		}
+		else{
+			user.setErrorcode("301");
+			user.setErrorMessage("already esist"+user.getUserid());
+		}
+		return new ResponseEntity<User>(user,HttpStatus.CREATED);
+			
+	}
+
+}
