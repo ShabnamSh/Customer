@@ -1,0 +1,91 @@
+
+
+ <style>
+body {
+	background:
+		url('http://www.planwallpaper.com/static/images/bg1.jpg')
+		fixed;
+	background-size: cover;
+	padding: 0;
+	margin: 0;
+}
+</style>
+<body>
+<br>
+<br>
+ 
+		<a href="#/cr" >CustomerReport</a>&nbsp;&nbsp;&nbsp;&nbsp;
+
+	<section id="register" 
+	ng-controller="UserController as ctrl">
+	<div class="container">
+
+		<div class="register-box">
+			<h2>Register</h2>
+			<form name="myForm" id="register" ng-submit="ctrl.submit()" role="form"
+				enctype="application/json">
+				<div class="form-block">
+					<input type="email" ng-model="ctrl.customer.emailId" name="email"
+						class="form-control" placeholder="Email.." />
+				</div>
+				<br>
+				<div class="form-block">
+					<input type="text" class="form-control" name="name"
+						ng-model="ctrl.customer.name" placeholder="User  name.." />
+				</div>
+				<br>
+				<div class="form-block">
+					<input type="text" class="form-control" name="cardId"
+						ng-model="ctrl.customer.cardId" placeholder=" Card ID.." />
+				</div>
+				<br>
+				<div class="form-block">
+					<input type="text" class="form-control" name="address"
+						ng-model="ctrl.customer.address" placeholder="Address......." />
+				</div>
+				<br>
+				<br> 
+				<div class="form-block">
+					<input type="text" class="form-control" name="dob"
+						ng-model="ctrl.customer.dob" placeholder="DOB.." />
+				</div>
+				<br>
+				<div class="form-block">
+				<b>Gender</b>
+					<label class="radio-inline"> <input ng-model="ctrl.customer.gender" type="radio" value="male"
+						name="optradio">Male
+					</label> <label class="radio-inline"> <input ng-model="ctrl.customer.gender" type="radio" value="female"
+						name="optradio">Female
+					</label>
+				</div>
+				<br> 
+				<div class="form-block">
+					<input type="tel" class="form-control" name="points"
+						ng-model="ctrl.customer.points" placeholder="Points.." />
+				</div>
+				<br>
+				
+				<div class="form-block">
+					<input type="tel" ng-model="ctrl.customer.creditLimit" name="creditLimit"
+						class="form-control" placeholder="CreditLimit.." />
+				</div>
+				<br>
+				<div class="form-block">
+					<div class="row">
+						<div class="col-md-6">
+							<input type="submit" class="btn btn-danger" value="Join Now" />
+						</div>
+						<div class="col-md-6">
+							<button type="button" ng-click="ctrl.reset()"
+									class="btn btn-warning ">Reset Form</button>
+						</div>
+					</div>
+				</div>
+			</form>
+		</div>
+
+	</div>
+</section>
+
+
+</body>
